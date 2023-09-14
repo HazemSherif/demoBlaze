@@ -18,7 +18,6 @@ public class TestBase {
     @BeforeTest
     public void startDriver(){
 
-        System.setProperty("webdriver.chrome.driver","/home/blink22/Desktop/Assignment/Resources/chromedriver");
         driver = new ChromeDriver();
         driver.get("https://demoblaze.com/");
         driver.manage().window().maximize();
