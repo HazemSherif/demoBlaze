@@ -18,7 +18,7 @@ public class ProductPage extends PageBase {
     public void addProductToCart(){
         WebElement addToCart = driver.findElement(addToCartBy);
         clickOnElement(addToCart,addToCartBy);
-        driver.switchTo().alert().accept();
+        acceptAlertBase();
     }
     public CartPage goToCart(){
         WebElement cartPage = driver.findElement(cartPageBy);

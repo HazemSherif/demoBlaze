@@ -31,10 +31,10 @@ public class SignUpPage extends PageBase {
         clickOnElement(signUpButton,signUpButtonBy);
     }
     public String alertMessage(){
-        return driver.switchTo().alert().getText();
+        return getAlertMessageBase();
     }
     public HomePage acceptAlert(){
-        driver.switchTo().alert().accept();
+        acceptAlertBase();
         return new HomePage(driver);
     }
 }

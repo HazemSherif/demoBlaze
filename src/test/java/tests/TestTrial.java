@@ -8,7 +8,7 @@ import pages.*;
 public class TestTrial extends TestBase {
     String randomString = generateRandomString();
     @Test
-    public void SingUp(){
+    public void SignUp(){
         SignUpPage signUpPage = homePage.clickOnSignUpLink();
         signUpPage.enterUserName(randomString);
         signUpPage.enterUserPassword("12345");
@@ -16,7 +16,7 @@ public class TestTrial extends TestBase {
         Assert.assertEquals(signUpPage.alertMessage(),"Sign up successful.");
         homePage = signUpPage.acceptAlert();
     }
-    @Test
+    @Test(dependsOnMethods = {"SignUp"})
     public void Login(){
         LoginPage loginPage = homePage.clickOnLoginButton();
         loginPage.enterName(randomString);

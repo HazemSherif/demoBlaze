@@ -5,9 +5,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-
 import java.time.Duration;
-import java.util.UUID;
 
 
 public class PageBase {
@@ -17,6 +15,10 @@ public class PageBase {
     public void waitForElementToBeDisplayed(By elementBy){
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
         wait.until(ExpectedConditions.visibilityOfElementLocated(elementBy));
+    }
+    public void waitForAlertToBeDisplayed(){
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
+        wait.until((ExpectedConditions.alertIsPresent()));
     }
     public void clickOnElement(WebElement element, By elementBy){
         waitForElementToBeDisplayed(elementBy);
@@ -29,6 +31,14 @@ public class PageBase {
     public String getElementText(WebElement element,By elementBy){
         waitForElementToBeDisplayed(elementBy);
         return element.getText();
+    }
+    public void acceptAlertBase(){
+        waitForAlertToBeDisplayed();
+        driver.switchTo().alert().accept();
+    }
+    public String getAlertMessageBase(){
+        waitForAlertToBeDisplayed();
+        return driver.switchTo().alert().getText();
     }
 
 }
