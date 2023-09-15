@@ -9,22 +9,26 @@ public class SignUpPage extends PageBase {
 
     WebDriver driver;
     public SignUpPage(WebDriver driver) {
+        super(driver);
         this.driver = driver;
     }
-    WebElement usernameField = driver.findElement(By.id("sign-username"));
-    WebElement passwordField = driver.findElement(By.id("sign-password"));
-    WebElement signUpButton = driver.findElement(By.xpath("//button[@onclick = 'register()']"));
+
+    By usernameFieldBy = By.id("sign-username");
+    By passwordFieldBy = By.id("sign-password");
+    By signUpButtonBy = By.xpath("//button[@onclick = 'register()']");
 
 
     public void enterUserName(String username){
-        usernameField.sendKeys(username);
+        WebElement usernameField = driver.findElement(usernameFieldBy);
+        fillInElement(usernameField,usernameFieldBy,username);
     }
     public void enterUserPassword(String password){
-        passwordField.sendKeys(password);
+        WebElement passwordField = driver.findElement(passwordFieldBy);
+        fillInElement(passwordField,passwordFieldBy, password);
     }
     public void clickSignUpButton(){
-        signUpButton.click();
-
+        WebElement signUpButton = driver.findElement(signUpButtonBy);
+        clickOnElement(signUpButton,signUpButtonBy);
     }
     public String alertMessage(){
         return driver.switchTo().alert().getText();

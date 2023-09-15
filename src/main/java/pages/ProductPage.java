@@ -9,18 +9,20 @@ public class ProductPage extends PageBase {
 
     WebDriver driver;
     public ProductPage(WebDriver driver) {
+        super(driver);
         this.driver = driver;
     }
-
-    WebElement addToCart = driver.findElement(By.className("btn-success"));
-    WebElement cartPage = driver.findElement(By.id("cartur"));
+    By addToCartBy = By.className("btn-success");
+    By cartPageBy = By.id("cartur");
 
     public void addProductToCart(){
-        clickOnElement(addToCart);
+        WebElement addToCart = driver.findElement(addToCartBy);
+        clickOnElement(addToCart,addToCartBy);
         driver.switchTo().alert().accept();
     }
     public CartPage goToCart(){
-        clickOnElement(cartPage);
+        WebElement cartPage = driver.findElement(cartPageBy);
+        clickOnElement(cartPage,cartPageBy);
         return new CartPage(driver);
     }
 

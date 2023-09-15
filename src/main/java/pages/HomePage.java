@@ -13,58 +13,64 @@ import java.util.Random;
 public class HomePage extends PageBase {
     WebDriver driver;
     public HomePage(WebDriver driver) {
+        super(driver);
         this.driver = driver;
     }
-    WebElement signUpLink = driver.findElement(By.xpath("//li[.//a[@id ='signin2']]"));
-    WebElement loginButton = driver.findElement(By.id("login2"));
 
-    WebElement phonesCategory = driver.findElement(By.xpath("//a[@onclick = \"byCat('phone')\"]"));
-    WebElement phoneList = driver.findElement(By.id("tbodyid"));
-    List<WebElement> phoneListsElements = phoneList.findElements(By.xpath("//div[@class = 'card h-100']"));
-
-    WebElement laptopsCategory = driver.findElement(By.xpath("//a[@onclick = \"byCat('notebook')\"]"));
-    WebElement laptopList = driver.findElement(By.id("tbodyid"));
-    List<WebElement> laptopListsElements = laptopList.findElements(By.xpath("//div[@class = 'card h-100']"));
-
-    WebElement monitorCategory = driver.findElement(By.xpath("//a[@onclick = \"byCat('monitor')\"]"));
-    WebElement monitorLists = driver.findElement(By.id("tbodyid"));
-    List<WebElement> monitorListsElements = monitorLists.findElements(By.xpath("//div[@class = 'card h-100']"));
-
-    WebElement categoryList = driver.findElement(By.className("list-group"));
-    List<WebElement> listOfCategories = categoryList.findElements(By.className("list-group-item"));
-
-    WebElement productList = driver.findElement(By.id("tbodyid"));
-    List<WebElement> listOfProducts = productList.findElements(By.tagName("img"));
-
-
+    By signUpLinkBy = By.xpath("//li[.//a[@id ='signin2']]");
+    By loginButtonBy = By.id("login2");
+    By phonesCategoryBy = By.xpath("//a[@onclick = \"byCat('phone')\"]");
+    By phoneListsElementsBy = By.xpath("//div[@class = 'card h-100']");
+    By laptopsCategoryBy = By.xpath("//a[@onclick = \"byCat('notebook')\"]");
+    By productListBy = By.id("tbodyid");
+    By monitorCategoryBy = By.xpath("//a[@onclick = \"byCat('monitor')\"]");
+    By monitorListsElementsBy = By.xpath("//div[@class = 'card h-100']");
+    By categoryListBy = By.className("list-group");
+    By listOfCategoriesBy = By.className("list-group-item");
+    By listOfProductsBy = By.tagName("img");
 
     public SignUpPage clickOnSignUpLink(){
-        clickOnElement(signUpLink);
+        WebElement signUpLink = driver.findElement(signUpLinkBy);
+        clickOnElement(signUpLink,signUpLinkBy);
         return new SignUpPage(driver);
     }
     public LoginPage clickOnLoginButton(){
-        clickOnElement(loginButton);
+        WebElement loginButton = driver.findElement(loginButtonBy);
+        clickOnElement(loginButton,loginButtonBy);
         return new LoginPage(driver);
     }
     public void clickPhonesCategory(){
-        clickOnElement(phonesCategory);
+        WebElement phonesCategory = driver.findElement(phonesCategoryBy);
+        clickOnElement(phonesCategory,phonesCategoryBy);
     }
     public int phoneCategorySize(){
+
+        WebElement phoneList = driver.findElement(productListBy);
+        List<WebElement> phoneListsElements = phoneList.findElements(phoneListsElementsBy);
         return phoneListsElements.size();
     }
     public void clickLaptopCategory(){
-        clickOnElement(laptopsCategory);
+        WebElement laptopsCategory = driver.findElement(laptopsCategoryBy);
+        clickOnElement(laptopsCategory,laptopsCategoryBy);
     }
     public int laptopCategorySize(){
+        WebElement laptopList = driver.findElement(productListBy);
+        List<WebElement> laptopListsElements = laptopList.findElements(By.xpath("//div[@class = 'card h-100']"));
         return laptopListsElements.size();
     }
     public void clickMonitorCategory(){
-        clickOnElement(monitorCategory);
+        WebElement monitorCategory = driver.findElement(monitorCategoryBy);
+        clickOnElement(monitorCategory,monitorCategoryBy);
     }
     public int monitorCategorySize(){
+        WebElement monitorLists = driver.findElement(productListBy);
+        List<WebElement> monitorListsElements = monitorLists.findElements(monitorListsElementsBy);
         return monitorListsElements.size();
     }
     public void randomCategorySelector(){
+
+        WebElement categoryList = driver.findElement(categoryListBy);
+        List<WebElement> listOfCategories = categoryList.findElements(listOfCategoriesBy);
 
         List<WebElement> filteredElements = new ArrayList<>();
         for (WebElement element : listOfCategories) {
@@ -79,6 +85,8 @@ public class HomePage extends PageBase {
 
     }
     public ProductPage randomProductSelector(){
+        WebElement productList = driver.findElement(productListBy);
+        List<WebElement> listOfProducts = productList.findElements(listOfProductsBy);
         Random randomNumber = new Random();
         int randomProduct = randomNumber.nextInt(listOfProducts.size());
         // scroll to center of page
@@ -87,12 +95,4 @@ public class HomePage extends PageBase {
         listOfProducts.get(randomProduct).click();
         return new ProductPage(driver);
     }
-
-
-
-
-
-
-
-
 }

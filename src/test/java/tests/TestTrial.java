@@ -5,11 +5,8 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 import pages.*;
 
-public class Tests extends TestBase {
+public class TestTrial extends TestBase {
     String randomString = generateRandomString();
-    HomePage homePage;
-
-
     @Test
     public void SingUp(){
         SignUpPage signUpPage = homePage.clickOnSignUpLink();
@@ -17,14 +14,14 @@ public class Tests extends TestBase {
         signUpPage.enterUserPassword("12345");
         signUpPage.clickSignUpButton();
         Assert.assertEquals(signUpPage.alertMessage(),"Sign up successful.");
-        signUpPage.acceptAlert();
+        homePage = signUpPage.acceptAlert();
     }
     @Test
     public void Login(){
         LoginPage loginPage = homePage.clickOnLoginButton();
         loginPage.enterName(randomString);
         loginPage.enterPassword("12345");
-        loginPage.login();
+        homePage = loginPage.login();
         Assert.assertEquals(loginPage.getUserName(), "Welcome"+ randomString);
     }
     @Test
@@ -36,7 +33,6 @@ public class Tests extends TestBase {
         homePage.clickMonitorCategory();
         Assert.assertNotEquals(0,homePage.monitorCategorySize());
     }
-
     @Test
     public void removeRandomProductFromCart(){
         homePage.randomCategorySelector();

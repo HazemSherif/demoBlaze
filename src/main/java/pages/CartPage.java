@@ -8,38 +8,45 @@ import pagehelpers.PageBase;
 public class CartPage extends PageBase {
     WebDriver driver;
     public CartPage(WebDriver driver) {
+        super(driver);
         this.driver = driver;
     }
-    WebElement purchaseButton = driver.findElement(By.className("btn-success"));
-    WebElement nameField = driver.findElement(By.id("name"));
-    WebElement creditCardField = driver.findElement(By.id("card"));
-    WebElement confirmPurchaseButton = driver.findElement(By.xpath("//button[@onclick = \"purchaseOrder()\"]"));
-    WebElement deleteProduct = driver.findElement(By.xpath("(//a[normalize-space()='Delete'])[1]"));
-    WebElement confirmationPopUp = driver.findElement(By.className("sweet-alert"));
-    WebElement okButton = driver.findElement(By.className("confirm"));
+    By purchaseButtonBy = By.className("btn-success");
+    By nameFieldBy =  By.id("name");
+    By creditCardFieldBy = By.id("card");
+    By confirmPurchaseButtonBy = By.xpath("//button[@onclick = \"purchaseOrder()\"]");
+    By deleteProductBy = By.xpath("(//a[normalize-space()='Delete'])[1]");
+    By confirmationPopUpBy = By.className("sweet-alert");
+    By okButtonBy = By.className("confirm");
 
     public void clickOnPurchaseButton(){
-        clickOnElement(purchaseButton);
+        WebElement purchaseButton = driver.findElement(purchaseButtonBy);
+        clickOnElement(purchaseButton,purchaseButtonBy);
     }
     public void enterName(){
-        fillInElement(nameField,"user name");
+        WebElement nameField = driver.findElement(nameFieldBy);
+        fillInElement(nameField,nameFieldBy,"user name");
     }
     public void enterCardNumber(){
-        fillInElement(creditCardField,"4242424242424242");
+        WebElement creditCardField = driver.findElement(creditCardFieldBy);
+        fillInElement(creditCardField,creditCardFieldBy,"4242424242424242");
     }
     public void pressThePurchaseButton(){
-        clickOnElement(confirmPurchaseButton);
+        WebElement confirmPurchaseButton = driver.findElement(confirmPurchaseButtonBy);
+        clickOnElement(confirmPurchaseButton,confirmPurchaseButtonBy);
     }
     public void clickOnDeleteButton(){
-        clickOnElement(deleteProduct);
+        WebElement deleteProduct = driver.findElement(deleteProductBy);
+        clickOnElement(deleteProduct,deleteProductBy);
     }
     public String successMessageText(){
-        return getElementText(confirmationPopUp);
+        WebElement confirmationPopUp = driver.findElement(confirmationPopUpBy);
+        return getElementText(confirmationPopUp,confirmationPopUpBy);
     }
     public void clickOnOkButton(){
-        clickOnElement(okButton);
+        WebElement okButton = driver.findElement(okButtonBy);
+        clickOnElement(okButton,okButtonBy);
     }
-
 
 
 }
