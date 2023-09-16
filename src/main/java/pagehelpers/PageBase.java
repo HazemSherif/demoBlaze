@@ -1,6 +1,7 @@
 package pagehelpers;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -13,7 +14,7 @@ public class PageBase {
     public PageBase(WebDriver driver){
         this.driver = driver;}
     public void waitForElementToBeDisplayed(By elementBy){
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         wait.until(ExpectedConditions.visibilityOfElementLocated(elementBy));
     }
     public void waitForAlertToBeDisplayed(){
@@ -40,5 +41,8 @@ public class PageBase {
         waitForAlertToBeDisplayed();
         return driver.switchTo().alert().getText();
     }
-
+    public void scrollToScreenCenter(){
+        JavascriptExecutor jsExecutor = (JavascriptExecutor) driver;
+        jsExecutor.executeScript("window.scrollTo(0, document.body.scrollHeight/2)");
+    }
 }

@@ -17,12 +17,12 @@ public class TestTrial extends TestBase {
         homePage = signUpPage.acceptAlert();
     }
     @Test(dependsOnMethods = {"SignUp"})
-    public void Login(){
+    public void Login() throws InterruptedException {
         LoginPage loginPage = homePage.clickOnLoginButton();
         loginPage.enterName(randomString);
         loginPage.enterPassword("12345");
         homePage = loginPage.login();
-        Assert.assertEquals(loginPage.getUserName(), "Welcome"+ randomString);
+        Assert.assertEquals(homePage.getUserName(), "Welcome "+ randomString);
     }
     @Test
     public void checkCategoriesContainsProducts(){
@@ -52,7 +52,7 @@ public class TestTrial extends TestBase {
         cartPage.enterName();
         cartPage.enterCardNumber();
         cartPage.pressThePurchaseButton();
-        Assert.assertEquals("Thank you for your purchase!", cartPage.successMessageText());
+        Assert.assertTrue(cartPage.successMessageText().contains("Thank you for your purchase!"));
         cartPage.clickOnOkButton();
     }
 

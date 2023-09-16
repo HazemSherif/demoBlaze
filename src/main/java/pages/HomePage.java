@@ -1,11 +1,7 @@
 package pages;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import pagehelpers.PageBase;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -28,6 +24,8 @@ public class HomePage extends PageBase {
     By categoryListBy = By.className("list-group");
     By listOfCategoriesBy = By.className("list-group-item");
     By listOfProductsBy = By.tagName("img");
+    By nameOfUserBy = By.id("nameofuser");
+
 
     public SignUpPage clickOnSignUpLink(){
         WebElement signUpLink = driver.findElement(signUpLinkBy);
@@ -81,7 +79,7 @@ public class HomePage extends PageBase {
         //Select random category
         Random random = new Random();
         int randomCategory = random.nextInt(filteredElements.size());
-        filteredElements.get(randomCategory).click();
+        clickOnElement(filteredElements.get(randomCategory),listOfCategoriesBy);
 
     }
     public ProductPage randomProductSelector(){
@@ -89,10 +87,17 @@ public class HomePage extends PageBase {
         List<WebElement> listOfProducts = productList.findElements(listOfProductsBy);
         Random randomNumber = new Random();
         int randomProduct = randomNumber.nextInt(listOfProducts.size());
-        // scroll to center of page
-        JavascriptExecutor jsExecutor = (JavascriptExecutor) driver;
-        jsExecutor.executeScript("window.scrollTo(0, document.body.scrollHeight/2)");
-        listOfProducts.get(randomProduct).click();
+        scrollToScreenCenter();
+        clickOnElement(listOfProducts.get(randomProduct),listOfProductsBy);;
         return new ProductPage(driver);
+    }
+    public String getUserName() {
+        WebElement nameOfUser = driver.findElement(nameOfUserBy);
+        try{
+            return getElementText(nameOfUser,nameOfUserBy);
+        } catch(StaleElementReferenceException e){
+            nameOfUser = driver.findElement(nameOfUserBy);
+        }
+        return getElementText(nameOfUser,nameOfUserBy);
     }
 }
