@@ -1,9 +1,6 @@
 package pagehelpers;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import java.time.Duration;
@@ -13,6 +10,15 @@ public class PageBase {
     protected WebDriver driver;
     public PageBase(WebDriver driver){
         this.driver = driver;}
+
+    // Handles clicking on stale elements
+     /*  public void waitForStaleElement(WebElement el, By by){
+        new WebDriverWait(driver,Duration.ofSeconds(10)).ignoring(StaleElementReferenceException.class).until((driver) ->{
+            clickOnElement(el, by);
+            return true;
+        });
+    }*/
+
     public void waitForElementToBeDisplayed(By elementBy){
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         wait.until(ExpectedConditions.visibilityOfElementLocated(elementBy));

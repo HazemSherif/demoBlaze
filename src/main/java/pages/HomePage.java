@@ -86,9 +86,15 @@ public class HomePage extends PageBase {
         WebElement productList = driver.findElement(productListBy);
         List<WebElement> listOfProducts = productList.findElements(listOfProductsBy);
         Random randomNumber = new Random();
-        int randomProduct = randomNumber.nextInt(listOfProducts.size());
-        scrollToScreenCenter();
-        clickOnElement(listOfProducts.get(randomProduct),listOfProductsBy);;
+        try{
+            int randomProduct = randomNumber.nextInt(listOfProducts.size());
+            scrollToScreenCenter();
+            clickOnElement(listOfProducts.get(randomProduct),listOfProductsBy);
+            return new ProductPage(driver);
+        } catch (StaleElementReferenceException e){
+             productList = driver.findElement(productListBy);
+             listOfProducts = productList.findElements(listOfProductsBy);
+        }
         return new ProductPage(driver);
     }
     public String getUserName() {
