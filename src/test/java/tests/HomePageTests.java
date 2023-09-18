@@ -1,10 +1,10 @@
 package tests;
 
-import helpers.TestBase;
+import helpers.BaseTest;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
-public class HomePageTests extends TestBase {
+public class HomePageTests extends BaseTest {
     @Test
     public void checkCategoriesContainsProducts(){
         homePage.clickPhonesCategory();

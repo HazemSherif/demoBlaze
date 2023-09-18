@@ -1,11 +1,11 @@
 package tests;
 
-import helpers.TestBase;
+import helpers.BaseTest;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import pages.*;
 
-public class UserAccountTests extends TestBase {
+public class UserAccountTests extends BaseTest {
     String randomString = generateRandomString();
     @Test
     public void SignUp(){

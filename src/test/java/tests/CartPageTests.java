@@ -1,12 +1,12 @@
 package tests;
 
-import helpers.TestBase;
+import helpers.BaseTest;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import pages.CartPage;
 import pages.ProductPage;
 
-public class CartPageTests extends TestBase {
+public class CartPageTests extends BaseTest {
     @Test
     public void removeRandomProductFromCart(){
         homePage.randomCategorySelector();
@@ -17,7 +17,6 @@ public class CartPageTests extends TestBase {
     }
     @Test
     public void checkOutWithRandomProduct(){
-
         homePage.randomCategorySelector();
         ProductPage productPage = homePage.randomProductSelector();
         productPage.addProductToCart();
