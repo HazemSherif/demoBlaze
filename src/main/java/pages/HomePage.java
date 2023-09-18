@@ -94,9 +94,9 @@ public class HomePage extends PageBase {
         } catch (StaleElementReferenceException e){
              productList = driver.findElement(productListBy);
              listOfProducts = productList.findElements(listOfProductsBy);
-            randomProduct = randomNumber.nextInt(listOfProducts.size());
-            scrollToScreenCenter();
-            clickOnElement(listOfProducts.get(randomProduct),listOfProductsBy);
+             randomProduct = randomNumber.nextInt(listOfProducts.size());
+             scrollToScreenCenter();
+             clickOnElement(listOfProducts.get(randomProduct),listOfProductsBy);
         }
 
         return new ProductPage(driver);
